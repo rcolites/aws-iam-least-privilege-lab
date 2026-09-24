@@ -40,13 +40,15 @@ overly-permissive.json
     "Arn": "arn:aws:iam::123456789012:user/app-dev"
 }
 ```
+```bash
 ╰─ aws s3 ls --profile app-dev
 2026-09-18 15:17:32 razvan-cloudsec-lab-23345
-
+```
+```bash
 ╰─ aws s3 ls s3://razvan-cloudsec-lab-23345 --profile app-dev
                            PRE private/
                            PRE public/
-
+```
 
                            
 ### 2. Private object enumeration and retrieval
