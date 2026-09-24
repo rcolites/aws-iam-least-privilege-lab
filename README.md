@@ -52,13 +52,14 @@ overly-permissive.json
 
                            
 ### 2. Private object enumeration and retrieval
-                           
+```bash                           
 ╰─ aws s3 ls s3://razvan-cloudsec-lab-23345/private/payroll.txt --profile app-dev
 2026-09-24 11:18:23         61 payroll.txt
-
+```
+```bash
 ╰─ aws s3 cp s3://razvan-cloudsec-lab-23345/private/payroll.txt - --profile app-dev
 CONFIDENTIAL TEST DATA - app-dev should NOT access this file
-
+```
 app-dev has access to confidential S3 objects in /private to list and read them.
 
 
@@ -88,28 +89,29 @@ The new policy:
 ## Validation
 
 Can't list all S3 buckets:
-
+``` bash
 ╰─ aws s3 ls --profile app-dev
 aws: [ERROR]: An error occurred (AccessDenied) when calling the ListBuckets operation: User: arn:aws:iam::123456789012:user/app-dev is not authorized to perform: s3:ListAllMyBuckets because no identity-based policy allows the s3:ListAllMyBuckets action
-
+```
 Can't list /private/*:
-
+```bash
 ╰─ aws s3 ls s3://razvan-cloudsec-lab-23345/private/ --profile app-dev
 aws: [ERROR]: An error occurred (AccessDenied) when calling the ListObjectsV2 operation: User: arn:aws:iam::123456789012:user/app-dev is not authorized to perform: s3:ListBucket on resource: "arn:aws:s3:::razvan-cloudsec-lab-23345" because no identity-based policy allows the s3:ListBucket action
-
+```
 Can't read /private/payroll.txt:
-
+```bash
 ╰─ aws s3 cp s3://razvan-cloudsec-lab-23345/private/payroll.txt - --profile app-dev
 download failed: s3://razvan-cloudsec-lab-23345/private/payroll.txt to - An error occurred (403) when calling the HeadObject operation: Forbidden
-
+```
 app-dev can read public and its content successfully:
-
+```bash
 ╰─ aws s3 ls s3://razvan-cloudsec-lab-23345/public/ --profile app-dev
 2026-09-18 15:20:12          0
 2026-09-24 11:18:09         42 documentation.txt
-
+```
+```bash
 ╰─ aws s3 cp s3://razvan-cloudsec-lab-23345/public/documentation.txt - --profile app-dev
 This file should be accessible by app-dev
-
+```
 
 
