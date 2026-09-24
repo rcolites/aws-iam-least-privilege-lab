@@ -67,11 +67,11 @@ app-dev has access to confidential S3 objects in /private to list and read them.
 ## Root Cause
 
 The problem is this overly permissive policy:
+```json
             "Effect": "Allow",
             "Action": "s3:*",
             "Resource": "*"
-
-
+```
 
 ## Remediation
 
