@@ -32,14 +32,14 @@ overly-permissive.json
 
 ### 1. Account-wide S3 enumeration
 
-
+```bash
 ╰─ aws sts get-caller-identity --profile app-dev
 {
     "UserId": "<REDACTED>",
     "Account": "123456789012",
     "Arn": "arn:aws:iam::123456789012:user/app-dev"
 }
-
+```
 ╰─ aws s3 ls --profile app-dev
 2026-09-18 15:17:32 razvan-cloudsec-lab-23345
 
